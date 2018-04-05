@@ -83,7 +83,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <div class="col-lg-3">
     <h1 class="my-4">Menu</h1>
     <div class="list-group">
-      <a href="<?=site_url('producto')?>" class="list-group-item active">Agregar Producto</a>
+      <a href="<?=site_url('controlador')?>" class="list-group-item ">Agregar Contrato</a>
+      <a href="<?=site_url('producto')?>" class="list-group-item">Agregar Producto</a>
       <a href="#" class="list-group-item">Agregar Pago</a>
       <a href="<?=site_url('controlador/menu')?>" class="list-group-item">Lista Deudores</a>
       <a href="<?=site_url('controlador/empresa')?>" class="list-group-item">Lista Empresas</a>

@@ -43,7 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				# code...
 			?>
 
-			<form action="<?=base_url('send_mail')?>" method="post">
+			<form action="<?=site_url('email_controller/send_mail/')?><?php echo $g->correo;?>" method ="post">
 			
 		
 		<tr>
@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<td><?php echo $k->fecha_vecimiento;?></td>
 			<td><?php echo $k->total;?></td>
 
-			<td><input type="submit" name="submit" value="Enviar"/></td>
+			<td><input type="submit" name="submit" value="Enviar Correo"/></td>
 
 
 			

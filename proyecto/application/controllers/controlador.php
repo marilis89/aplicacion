@@ -29,23 +29,6 @@ class Controlador extends CI_Controller {
    }
 
 
-
-
-    public function obtener_correo($id) {
-
-        // $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
-         //foreach ($empresa as $k) {
-
-      $correo = $this-> Empresa_model->consulta_correo($id);
-
-
-      $respuesta= $this->library('email', $correo);
-     // $this -> email->send_mail($correo);
-      
-      return $respuesta;
-     
-    }
-
     public function menu(){
 
      $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();

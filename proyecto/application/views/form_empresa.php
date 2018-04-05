@@ -22,17 +22,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <center><h1>Formulario Nuevo Contrato</h1></center>
   <div class="container">
-
+    
 		<form action="<?=site_url('controlador/guardarContrato');?>" method="post">
-
  
-
       <div class="card mt-4">
         <div class="container">
-           <br>
-			  
-    
-    
+        <br>
+
     <div class="form-group row">
       <label for="inputNombre" class="col-sm-3 col-form-label">Nombre: </label>
       <div class="col-sm-5">
@@ -115,6 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 
+
 <div class="card mt-4">
   <div class="container">
      <br>
@@ -123,6 +120,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <label for="inputProducto" class="col-sm-3 col-form-label">Nombre Producto</label>
     <div class="col-sm-5">
      <input type="text" class="form-control" name="inputProducto" placeholder="" required="">
+  </div>
+      <div class="col-sm-1">
+    <input type="image" src="<?=base_url('img/mas.jpg')?>" width="20" height="20" onclick="agregar()">
+  </div>
+
+</div>
+  <div class="form-group row" id="nombreP" >
+    <label for="inputProducto" class="col-sm-3 col-form-label">Nombre Producto</label>
+     <div class="col-sm-5">
+     <input type="text" class="form-control" name="inputProducto2" placeholder="" required="">
   </div>
 </div>
   <div class="form-group row">
@@ -208,6 +215,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <center><button type="submit" class="btn btn-primary">Guardar</button></center>
 
 </form>
+
 </div>
 </div>
 </div>
@@ -215,7 +223,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 
-		
+		<script type="text/javascript">
+      function agregar(){
+
+        var c = document.getElementById('nombreP');
+         c.style.display = 'block';
+      }
+    </script>
 	
 
 	

@@ -4,66 +4,45 @@ class Email_controller extends CI_Controller {
 
     function __construct() {
         parent::__Construct();
-        $this->load->library(array('form_validation','email'));
+        
         $this->load->helper(array('url','html'));
        }
 
-function index(){
-       
-       $data['title'] = 'Formulario de Contacto';
-       $data['msg'] = NULL;
-     
-       $this->form_validation->set_rules('name', 'Nombre', 'required|alpha|min_length[3]');
-       $this->form_validation->set_rules('phone', 'Celular', 'required|numeric');
-       $this->form_validation->set_rules('address', 'Ciudad y dirección', 'required');
-       $this->form_validation->set_rules('email', 'Email', 'required|valid_email');  
-       $this->form_validation->set_rules('message', 'Mensaje', 'required');  
-     
-       $this->form_validation->set_message('required', 'el campo %s es requerido');
-       $this->form_validation->set_message('valid_email', 'El email no es válido');
-         
-           $this -> form_validation -> set_error_delimiters('<ul><li>', '</li></ul>');
-     
-       $this->form_validation->set_message('required', 'el campo %s es requerido');
-       $this->form_validation->set_message('valid_email', 'El email no es válido');
-         
-           $this -> form_validation -> set_error_delimiters('<ul><li>', '</li></ul>');
-          // $this->load->view('send_email'); 
-      
-      
-    if ($this->form_validation->run() == FALSE)
-        {
-            $this->load->view('send_mail', $data); 
 
-          
-            }else{
-                      
-            $name = $this->input->post('name');
-            $mobil = $this->input->post('phone');
-            $email = $this->input->post('email');
-            $message = $this->input->post('message');
-                      
-        // Datos para enviar el correo
-            $this->email->from('vmarisela2@gmail.com', 'Ejemplo');
-            $this->email->to($email);
-            $this->email->subject('Email enviado con CI y Gmail');              
-            $this->email->message($message);
-          
-            if($this->email->send()){
-          
-            $data['title']='Mensaje Enviado';
-            $data['msg'] = 'Mensaje enviado a su email';
-                     // echo $this->email->print_debugger(); exit;                            
-            $this->load->view('send_email', $data);
-          
-             }else{
-                $data['title']='El mensaje no se pudo enviar';
-                $this->load->view('send_mail', $data);
-            
-             }
-                        
-           }
+    function send_mail($correo){
+      $this->load->library('email');
+          $this->email->initialize($config);
+ 
+      //Ponemos la dirección de correo que enviará el email y un nombre
+        $this->email->from('vmarisela2@gmail.com', 'Victor Robles');
+         
+      /*
+       * Ponemos el o los destinatarios para los que va el email
+       * en este caso al ser un formulario de contacto te lo enviarás a ti
+       * mismo
+       */
+        $this->email->to('vmarisela2@gmail.com', 'Víctor Robles');
+         
+      //Definimos el asunto del mensaje
+        $this->email->subject("hola");
+         
+      //Definimos el mensaje a enviar
+        $this->email->message(
+                "Email: ".$correo.
+                " Mensaje: hola"
+                );
+         
+        //Enviamos el email y si se produce bien o mal que avise con una flasdata
+        if($this->email->send()){
+         
+            $this->session->set_flashdata('envio', 'Email enviado correctamente');
+        }else{
+        
+            $this->session->set_flashdata('envio', 'No se a enviado el email');
         }
+       }
+
+
     } 
 
     ?>
