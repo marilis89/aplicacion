@@ -40,26 +40,6 @@ class Controlador extends CI_Controller {
 
       //$this->load->helper('form');
 
-                                        //name del campo, titulo, restricciones
-      $this->form_validation->set_rules('inputNombre', 'Nombre', 'required|min_length[3]|alpha|trim');
-       $this->form_validation->set_rules('inputCedula', 'Cedula', 'required|numeric');
-       $this->form_validation->set_rules('inputRepresentante', 'Representante Legal', 'required|min_length[3]|alpha|trim');
-       $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required|numeric');
-      $this->form_validation->set_rules('email', 'Email', 'required|min_length[3]|valid_email|trim');
-      $this->form_validation->set_rules('password', 'Contraseña', 'required|min_length[3]');
-             
-            //Mensajes
-            // %s es el nombre del campo que ha fallado
-            $this->form_validation->set_message('required','El campo %s es obligatorio'); 
-            $this->form_validation->set_message('alpha','El campo %s debe estar compuesto solo por letras');
-            $this->form_validation->set_message('min_length[3]','El campo %s debe tener mas de 3 caracteres');
-            $this->form_validation->set_message('valid_email','El campo %s debe ser un email correcto');
-             
-             if($this->form_validation->run()!=false){ //Si la validación es correcta
-                $datos["mensaje"]="Validación correcta";
-             }else{
-                $datos["mensaje"]="Validación incorrecta";
-             }
 
         $nombre = $this->input->post('inputNombre');
         $cedula = $this->input->post('inputCedula');  

@@ -68,6 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
               </li>
             </ul>
+            <a href="<?=site_url('login_controlador/logout');?>">Cerrar Sesion</a>
 
           </li>
         </ul>

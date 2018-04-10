@@ -17,7 +17,7 @@ class Login_controlador extends CI_Controller
 	{
 		if ($this->session->userdata('login')) {
 			# code...
-			redirect(site_url()."/prueba");
+			redirect(site_url()."/controlador");
 		}
 		else{
 			$this->load->view('user/login');

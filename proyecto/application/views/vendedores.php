@@ -28,6 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      <th scope="col">Empresa</th>
 	      <th scope="col">Correo</th>
 	      <th scope="col">Fecha vencimiento</th>
+	      <th scope="col">Dias de vencimiento</th>
 	      <th scope="col">Valor Pago</th>
 	      
 	      <th scope="col">...</th>
@@ -51,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<td><?php echo $g->nombre_empresa;?></td>
 			<td><?php echo $g->correo;?></td>
 			<td><?php echo $k->fecha_vecimiento;?></td>
+			<<td></td>
 			<td><?php echo $k->total;?></td>
 
 			<td><input type="submit" name="submit" value="Enviar Correo"/></td>
