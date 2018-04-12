@@ -37,14 +37,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  </thead>
 	  <tbody>
 	<?php
+	
 
-	foreach ($empresa as $g) {
-		foreach ($pago as $k) {
+	foreach ($empresa as $i) {
+		foreach ($i->empresa as $g){
+		foreach ($i->pago as $k) {
 
 			if ($k->id_contrato == $g->id_contrato && $k->total < $k->valor_anual) {
 				$debe=$k->valor_anual -$k->total;
-				$actual= new DateTime("now");
-				$fecha= $k->fecha_vecimiento->diff($actual);
+				//$actual= new DateTime("now");
+				//$fecha= $k->fecha_vecimiento->diff($actual);
 				# code...
 			?>
 
@@ -56,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<td><?php echo $g->nombre_empresa;?></td>
 			<td><?php echo $g->correo;?></td>
 			<td><?php echo $k->fecha_vecimiento;?></td>
-			<td><?php echo $fecha->format('%R%a días');?></td>
+			<td><?php ?></td>
 			<td><?php echo $k->valor_anual;?></td>
 			<td><?php echo $debe;?></td>
 
@@ -71,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php
 		if ($this->session->flashdata('envio')){
 			echo $this->session->flashdata('envio');
+		}
 		}
 		}
 		}
@@ -94,7 +97,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	
 		
-
+<<script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer>
+	console.log($empresa);
+</script>
 
 	
 

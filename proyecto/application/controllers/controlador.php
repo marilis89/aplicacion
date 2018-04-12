@@ -3,9 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Controlador extends CI_Controller {
 
+  var $API="";
+
      public function __construct(){
         parent::__construct();
-       
+       $this->API ='http://localhost/proyecto/index.php';
        $this->load->library('session');
        $this->load->model('Empresa_model');
        $this->load->helper('url');
@@ -31,8 +33,10 @@ class Controlador extends CI_Controller {
 
     public function menu(){
 
-     $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
-    $empresa['pago'] = $this-> Empresa_model -> conecta_bd_a();
+      $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_correo/index_get') );
+
+    // $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
+   // $empresa['pago'] = $this-> Empresa_model -> conecta_bd_a();
       $this->load->view('vendedores', $empresa);
     }
 
