@@ -12,7 +12,7 @@ class Rest_correo extends REST_Controller {
     }
 
 
-    public function index_get($id){
+    public function index_get(){
     	if (! $id) {
 			# code...
 			$this->response(NULL, 400);

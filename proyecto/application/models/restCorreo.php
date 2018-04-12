@@ -13,20 +13,19 @@ class Model_restdetallecarrito extends CI_Model
 		parent::__construct();
 	}
 
-	public function get($id)
+	public function get()
 	{
 		# code...
 
-		if (! is_null($id)) {
 			# code...
-			$query = $this->db->select('correo')->from('empresa')->where('id_empresa',$id)->get();
+			$query = $this->db->select('*')->from('empresa')->get();
 			if ($query->num_rows() === 1) {
 				# code...
 				return $query->row_array();
 			}
 
 			return NULL;
-		}
+	
 
 	}
 }

@@ -29,7 +29,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	      <th scope="col">Correo</th>
 	      <th scope="col">Fecha vencimiento</th>
 	      <th scope="col">Dias de vencimiento</th>
-	      <th scope="col">Valor Pago</th>
+	      <th scope="col">Valor Anual</th>
+	      <th scope="col">Valor Pendiente</th>
 	      
 	      <th scope="col">...</th>
 	    </tr>
@@ -41,6 +42,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		foreach ($pago as $k) {
 
 			if ($k->id_contrato == $g->id_contrato && $k->total < $k->valor_anual) {
+				$debe=$k->valor_anual -$k->total;
+				$actual= new DateTime("now");
+				$fecha= $k->fecha_vecimiento->diff($actual);
 				# code...
 			?>
 
@@ -52,8 +56,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<td><?php echo $g->nombre_empresa;?></td>
 			<td><?php echo $g->correo;?></td>
 			<td><?php echo $k->fecha_vecimiento;?></td>
-			<<td></td>
-			<td><?php echo $k->total;?></td>
+			<td><?php echo $fecha->format('%R%a días');?></td>
+			<td><?php echo $k->valor_anual;?></td>
+			<td><?php echo $debe;?></td>
 
 			<td><input type="submit" name="submit" value="Enviar Correo"/></td>
 
