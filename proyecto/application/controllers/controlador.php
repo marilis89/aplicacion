@@ -19,6 +19,20 @@ class Controlador extends CI_Controller {
     
       $nombre['vendedor']=$this-> Empresa_model -> nombreVendedor();
 
+   /*   foreach ($nombre as $i) {
+        foreach ($i->empresa as $g) {
+          foreach ($i->pago as $k) {
+
+            if ($k->id_contrato == $g->id_contrato && $k->total < $k->valor_anual) {
+              $this->site_url('email_controller/send_mail/$g->correo');
+            }
+            
+          }
+          
+        }
+        
+      }*/
+
       
      $this->load->view('form_empresa', $nombre);
     // redirect(base_url());

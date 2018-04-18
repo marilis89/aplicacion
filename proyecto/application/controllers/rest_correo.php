@@ -10,15 +10,21 @@ class Rest_correo extends REST_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->model('Empresa_model');
+         $this->load->model('Baseprueba_model');
     }
 
 
     public function index_get(){
 
-    	//llamando al modelo para consultar en base de datos
+    	//llamando al modelo para consultar en base de datos 1
 
-    	 $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
-    $empresa['pago'] = $this-> Empresa_model -> conecta_bd_a();
+    	$empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
+   $empresa['pago'] = $this-> Empresa_model -> conecta_bd_a();
+
+    //llamando al modelo para consultar en base de datos 2
+
+ //$empresa['empresa1'] = $this-> Baseprueba_model -> consultaEmpresas();
+   //$empresa['pago1'] = $this-> Baseprueba_model -> consultaPagos();
     	
 
 // transformando datos a json

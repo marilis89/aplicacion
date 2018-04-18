@@ -26,9 +26,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">Empresa</th>
-	      <th scope="col">Correo</th>
+	      <th scope="col">Fecha contrato</th>
 	      <th scope="col">Fecha vencimiento</th>
-	      <th scope="col">Dias de vencimiento</th>
+	      <th scope="col">Dias para vencer</th>
 	      <th scope="col">Valor Anual</th>
 	      <th scope="col">Valor Pendiente</th>
 	      
@@ -40,32 +40,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 
 	foreach ($empresa as $i) {
+		//echo $empresa;
 		foreach ($i->empresa as $g){
+			foreach ($g as $g1) {
 		foreach ($i->pago as $k) {
+			foreach ($k as $k1) {
 
-			if ($k->id_contrato == $g->id_contrato && $k->total < $k->valor_anual) {
-				$debe=$k->valor_anual -$k->total;
-				//$actual= new DateTime("now");
-				//$fecha= $k->fecha_vecimiento->diff($actual);
+			if ($k1->id_contrato == $g1->id_contrato && $k1->total < $k1->valor_anual) {
+				$debe=$k1->valor_anual -$k1->total;
+				$actual=date('Y-m-d');
+				$dias = (strtotime($actual)-strtotime($k1->fecha_vecimiento))/86400;
+                $dias = abs($dias); $dias = floor($dias);
 				# code...
 			?>
 
-			<form action="<?=site_url('email_controller/send_mail/')?><?php echo $g->correo;?>" method ="post">
+			<form action="<?=site_url('email_controller/send_mail/')?><?php echo $g1->correo;?>" method ="post">
 			
 		
 		<tr>
-			<td><?php echo $g->id_empresa;?></td>
-			<td><?php echo $g->nombre_empresa;?></td>
-			<td><?php echo $g->correo;?></td>
-			<td><?php echo $k->fecha_vecimiento;?></td>
-			<td><?php ?></td>
-			<td><?php echo $k->valor_anual;?></td>
+			<td><?php echo $g1->id_empresa;?></td>
+			<td><?php echo $g1->nombre_empresa;?></td>
+			<td><?php echo $k1->fecha_contrato;?></td>
+			<td><?php echo $k1->fecha_vecimiento;?></td>
+			<td><?php echo $dias;?></td>
+			<td><?php echo $k1->valor_anual;?></td>
 			<td><?php echo $debe;?></td>
 
-			<td><input type="submit" name="submit" value="Enviar Correo"/></td>
+			<td><input type="image" src="<?=base_url('img/correo.jpg')?>" width="20" height="20" name="submit" value="Enviar Correo"/></td>
 
-
-			
 
 		</tr>
 		</form>
@@ -73,6 +75,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php
 		if ($this->session->flashdata('envio')){
 			echo $this->session->flashdata('envio');
+		}
+		}
 		}
 		}
 		}
@@ -97,9 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	
 		
-<<script src="/javascripts/application.js" type="text/javascript" charset="utf-8" async defer>
-	console.log($empresa);
-</script>
+
 
 	
 
