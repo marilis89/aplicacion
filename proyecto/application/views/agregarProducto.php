@@ -35,8 +35,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <option selected>Elegir...</option>
       <?php 
       foreach ($empresa as $k) 
+        foreach ($k as $k1) 
+          
+       
 
-        echo ' <option value='.$k->id_contrato.'>'.$k->nombre_empresa.'</option>'
+        echo ' <option value='.$k1->id_contrato.'>'.$k1->nombre_empresa.'</option>'
+
         # code...
       
       ?>

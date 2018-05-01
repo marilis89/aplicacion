@@ -9,36 +9,27 @@ function __construct(){
   }
    
    
-    function conecta_bd(){
+    function consulta_empresa(){
 
-      $this->load->model('Baseprueba_model');
 
       $query = $this->db->query('SELECT *
       FROM empresa');
-      $query=$query ->result();
-
-      $query2= $this-> Baseprueba_model -> consultaEmpresas2();
-      $query3= $this-> Baseprueba_model -> consultaEmpresas3();
-
-      $array1= array($query,$query2,$query3);
+     
     
-      return $array1;
+      return $query->result();
    }
 
-   function conecta_bd_a(){
-     $this->load->model('Baseprueba_model');
+   function consulta_pago(){
+    
       $query = $this->db->query('SELECT p.id_contrato, c.fecha_vecimiento, c.valor_anual, c.fecha_contrato,
 SUM(p.valor_pago) total
  from pago p,contrato c WHERE c.id_contrato = p.id_contrato and c.fecha_vecimiento >= NOW() 
 GROUP BY p.id_contrato');
-      $query=$query ->result();
+      
 
-      $query2=$this-> Baseprueba_model -> consultaPagos2();
-      $query3=$this-> Baseprueba_model -> consultaPagos3();
-
-      $array1= array($query,$query2,$query3);
     
-      return $array1; 
+    
+      return $query ->result(); 
    }
 
    function consulta_correo($id){

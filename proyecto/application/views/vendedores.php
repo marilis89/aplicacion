@@ -42,8 +42,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	foreach ($empresa as $i) {
 		//echo $empresa;
 		foreach ($i->empresa as $g){
+			foreach ($i->pago as $k) {
 			foreach ($g as $g1) {
-		foreach ($i->pago as $k) {
+		
 			foreach ($k as $k1) {
 
 			if ($k1->id_contrato == $g1->id_contrato && $k1->total < $k1->valor_anual) {

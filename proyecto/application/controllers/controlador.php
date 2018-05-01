@@ -11,6 +11,7 @@ class Controlador extends CI_Controller {
        $this->load->library('session');
        $this->load->model('Empresa_model');
        $this->load->helper('url');
+       
      //  $this->load->library('form_validation');
     }
 
@@ -40,14 +41,16 @@ class Controlador extends CI_Controller {
    }
 
    public function empresa(){
-    $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
+    $empresa['empresa3']= json_decode($this-> curl->simple_get('http://192.168.5.31/proyecto/index.php/rest_correo/index_get') );
+    $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectop/index.php/rest_empresa/index_get') );
+    $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_empresa/index_get'));
     $this->load->view('listaEmpresa',$empresa);
    }
 
 
     public function menu(){
 
-      $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_correo/index_get') );
+      $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_empresa/index_get') );
 
     // $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
    // $empresa['pago'] = $this-> Empresa_model -> conecta_bd_a();

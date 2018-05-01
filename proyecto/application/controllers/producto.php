@@ -34,6 +34,9 @@ public function guardarNuevoProducto(){
     $id_contrato= $this->input->post('inputContrato');
 
  $id= $this-> Empresa_model -> guardarNuevoProducto($producto,$id_contrato);
+  $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
+
+ $this->load->view('agregarProducto', $empresa);
   
   
 }

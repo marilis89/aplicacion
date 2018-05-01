@@ -37,8 +37,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <tbody>
 	<?php
 
-	foreach ($empresa as $g) {
-		
+
+	foreach ($empresa as $i) {
+		foreach ($i->empresa as $g) {
+     
+      
+   
 				# code...
 			?>
 
@@ -61,7 +65,77 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</tr>
 	
 		
-		<?php } ?>
+		<?php } } ?>
+
+    <?php
+
+
+  foreach ($empresa2 as $i) {
+    foreach ($i->empresa as $g) {
+     
+      
+   
+        # code...
+      ?>
+
+      
+      
+    
+    <tr>
+      <td><?php echo $g->id_empresa;?></td>
+      <td><?php echo $g->cedula_ruc;?></td>
+      <td><?php echo $g->nombre_empresa;?></td>
+      <td><?php echo $g->correo;?></td>
+      <td><?php echo $g->link;?></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
+
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
+
+
+      
+
+    </tr>
+  
+    
+    <?php } } ?>
+
+      <?php
+
+
+  foreach ($empresa3 as $i) {
+    foreach ($i->empresa as $g) {
+     
+      
+   
+        # code...
+      ?>
+
+      
+      
+    
+    <tr>
+      <td><?php echo $g->id_empresa;?></td>
+      <td><?php echo $g->cedula_ruc;?></td>
+      <td><?php echo $g->nombre_empresa;?></td>
+      <td><?php echo $g->correo;?></td>
+      <td><?php echo $g->link;?></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
+
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
+
+
+      
+
+    </tr>
+  
+    
+    <?php } } ?>
+
+  
+
+
+
+
 
 	
 	  </tbody>
@@ -145,7 +219,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     	<?php 
       foreach ($empresa as $g) {
         ?>
-    		var c = '<?php echo $g->id_empresa;?>';
+    		var c = '<?php echo $g1->id_empresa;?>';
         if (c == id){ 
         
 
