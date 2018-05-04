@@ -14,9 +14,10 @@ class Producto extends CI_Controller {
 
 public function index(){
 
- $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
+ $empresa['empresa'] = $this-> Empresa_model -> consulta_empresa();
 
- $this->load->view('agregarProducto', $empresa);
+
+ $this->load->view('agregarProducto',$empresa);
     // redirect(base_url());
 
 }
@@ -34,7 +35,7 @@ public function guardarNuevoProducto(){
     $id_contrato= $this->input->post('inputContrato');
 
  $id= $this-> Empresa_model -> guardarNuevoProducto($producto,$id_contrato);
-  $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
+  $empresa['empresa'] = $this-> Empresa_model -> consulta_empresa();
 
  $this->load->view('agregarProducto', $empresa);
   

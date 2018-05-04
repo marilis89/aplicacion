@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="<?=base_url('librerias/css/bootstrap.css') ?>" rel="stylesheet">
     <script type="text/javascript" src="<?=base_url('librerias/js/bootstrap.min.js')?>"></script> 
     <script type="text/javascript" src="<?=base_url('librerias/jquery/jquery.min.js')?>"></script> 
+    
 
 	
 

@@ -40,4 +40,26 @@ class Rest_empresa extends REST_Controller {
 		 
     }
 
+
+
+    public function index_put($data,$id)
+    {
+        
+
+        # code...
+        if ((! $this->put('empresa'))|| (! $id)) {
+            # code...
+            $this->response(NULL, 400);
+        }
+
+        $empresa = $this-> Empresa_model->updateEmpresa($data,$id);
+
+        if (! is_null($empresa)) {
+            # code...
+            $this->response(array('response' => 'Empresa Actualizada'),200);
+        }else{
+            $this->response(array('error' => 'Ha ocurrido un error en el servidor'),400);
+        }
+    }
+
 }
