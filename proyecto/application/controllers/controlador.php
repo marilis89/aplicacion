@@ -51,9 +51,10 @@ class Controlador extends CI_Controller {
     public function menu(){
 
       $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_empresa/index_get') );
+       $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectop/index.php/rest_empresa/index_get') );
+       $empresa['empresa3']= json_decode($this-> curl->simple_get('http://192.168.5.31/proyecto/index.php/rest_correo/index_get') );
+   
 
-    // $empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
-   // $empresa['pago'] = $this-> Empresa_model -> conecta_bd_a();
       $this->load->view('vendedores', $empresa);
     }
 
@@ -138,10 +139,12 @@ class Controlador extends CI_Controller {
     'servicio_facturacion'=>$this->input->post('inputFacturacion')
   );
 
-  $mensaje=$this-> Empresa_model->updateEmpresa($empresa,$id_empresa);
+   $mensaje= $this-> curl->simple_get($this->API.'/rest_empresa/index_put('.$empresa,$id_empresa.')');
+
+  //$mensaje=$this-> Empresa_model->updateEmpresa($empresa,$id_empresa);
 
   if($mensaje = TRUE){
-    $data['empresa']=$this-> Empresa_model -> conecta_bd();
+    $data['empresa']=$this-> Empresa_model -> consulta_empresa();
   $this->load->view('listaEmpresa',$data);
   }
  }

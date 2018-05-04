@@ -36,6 +36,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    </tr>
 	  </thead>
 	  <tbody>
+
+	  	<!-- php para presentar json propio -->
 	<?php
 	
 
@@ -43,28 +45,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		//echo $empresa;
 		foreach ($i->empresa as $g){
 			foreach ($i->pago as $k) {
-			foreach ($g as $g1) {
 		
-			foreach ($k as $k1) {
 
-			if ($k1->id_contrato == $g1->id_contrato && $k1->total < $k1->valor_anual) {
-				$debe=$k1->valor_anual -$k1->total;
+			if ($k->id_contrato == $g->id_contrato && $k->total < $k->valor_anual) {
+				$debe=$k->valor_anual -$k->total;
 				$actual=date('Y-m-d');
-				$dias = (strtotime($actual)-strtotime($k1->fecha_vecimiento))/86400;
+				$dias = (strtotime($actual)-strtotime($k->fecha_vecimiento))/86400;
                 $dias = abs($dias); $dias = floor($dias);
 				# code...
 			?>
 
-			<form action="<?=site_url('email_controller/send_mail/')?><?php echo $g1->correo;?>" method ="post">
+			<form action="<?=site_url('email_controller/send_mail/')?><?php echo $g->correo;?>" method ="post">
 			
 		
 		<tr>
-			<td><?php echo $g1->id_empresa;?></td>
-			<td><?php echo $g1->nombre_empresa;?></td>
-			<td><?php echo $k1->fecha_contrato;?></td>
-			<td><?php echo $k1->fecha_vecimiento;?></td>
+			<td><?php echo $g->id_empresa;?></td>
+			<td><?php echo $g->nombre_empresa;?></td>
+			<td><?php echo $k->fecha_contrato;?></td>
+			<td><?php echo $k->fecha_vecimiento;?></td>
 			<td><?php echo $dias;?></td>
-			<td><?php echo $k1->valor_anual;?></td>
+			<td><?php echo $k->valor_anual;?></td>
 			<td><?php echo $debe;?></td>
 
 			<td><input type="image" src="<?=base_url('img/correo.jpg')?>" width="20" height="20" name="submit" value="Enviar Correo"/></td>
@@ -76,15 +76,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php
 		if ($this->session->flashdata('envio')){
 			echo $this->session->flashdata('envio');
-		}
-		}
-		}
-		}
-		}
-		}
+		}}}}} ?>
 
-	}
-	?>
+
+
+<!-- php para presentar json de otra app -->
+
+			<?php
+	
+
+	foreach ($empresa2 as $i) {
+		
+		foreach ($i->empresa as $g){
+			foreach ($i->pago as $k) {
+		
+
+			if ($k->id_contrato == $g->id_contrato && $k->total < $k->valor_anual) {
+				$debe=$k->valor_anual -$k->total;
+				$actual=date('Y-m-d');
+				$dias = (strtotime($actual)-strtotime($k->fecha_vecimiento))/86400;
+                $dias = abs($dias); $dias = floor($dias);
+				# code...
+			?>
+
+			<form action="<?=site_url('email_controller/send_mail/')?><?php echo $g->correo;?>" method ="post">
+			
+		
+		<tr>
+			<td><?php echo $g->id_empresa;?></td>
+			<td><?php echo $g->nombre_empresa;?></td>
+			<td><?php echo $k->fecha_contrato;?></td>
+			<td><?php echo $k->fecha_vecimiento;?></td>
+			<td><?php echo $dias;?></td>
+			<td><?php echo $k->valor_anual;?></td>
+			<td><?php echo $debe;?></td>
+
+			<td><input type="image" src="<?=base_url('img/correo.jpg')?>" width="20" height="20" name="submit" value="Enviar Correo"/></td>
+
+
+		</tr>
+		</form>
+		
+		<?php
+		if ($this->session->flashdata('envio')){
+			echo $this->session->flashdata('envio');
+		}}}}} ?>
 
 		
 

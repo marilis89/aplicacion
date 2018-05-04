@@ -34,14 +34,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <select name="inputContrato" class="form-control">
       <option selected>Elegir...</option>
       <?php 
-      foreach ($empresa as $k) 
-        foreach ($k as $k1) 
-          
+   
+      foreach ($empresa as $k) {
        
+          
 
-        echo ' <option value='.$k1->id_contrato.'>'.$k1->nombre_empresa.'</option>'
+        echo ' <option value='.$k->id_contrato.'>'.$k->nombre_empresa.'</option>';
 
-        # code...
+        
+        }
       
       ?>
         
@@ -52,25 +53,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <label for="inputCelular">Nombre Producto</label>
       <input type="text" class="form-control" name="inputProducto" placeholder="">
     </div>
-    <div class="form-group">
-      <label for="inputCelular">Firmante</label>
-      <input type="text" class="form-control" name="inputFirmante" placeholder="">
-    </div>
   <div class="form-row">
     
     <div class="form-group col-md-4">
       <label for="inputTelefono">Valor</label>
          <input type="text" class="form-control" name="inputValor" placeholder="">
     </div>
-    <div class="form-group col-md-4">
-      <label for="inputCelular">Abono</label>
-      <input type="text" class="form-control" name="inputAbono" placeholder="">
-    </div>
+  
   </div>
 
- 
-    
-    
   </div>
 </div>
 <br>
