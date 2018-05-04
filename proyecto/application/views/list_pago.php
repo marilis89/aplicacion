@@ -1,0 +1,202 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?><!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+
+
+  <link rel="stylesheet" type="text/css" href="<?= base_url();?>librerias/css/bootstrap-grid.css">
+   <script type="text/javascript" src="<?= base_url();?>librerias/js/bootstrap.js"></script>
+  <link rel="stylesheet" type="text/css" href="<?= base_url();?>librerias/css/bootstrap.min.css">
+  <script type="text/javascript" src="<?= base_url();?>librerias/jquery/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+
+        <?php $this->load->view("estilos/estilo"); ?>
+
+        <div class="col-lg-9">
+
+        	<div class="card mt-4">
+
+        		<center><h1>PAGOS</h1></center>
+        		<div class="container">
+
+
+        			<div class="table-responsive">
+        				<table class="table">
+        					<thead>
+        						<tr>
+        							<th scope="col">#</th>
+        							<th scope="col">Nombre Empresa</th>
+        							<th scope="col">Valor Anual</th>
+        							<th scope="col">Pago</th>
+                                    <th scope="col">Estado</th>
+        							<th scope="col"></th>
+        							</tr>
+        					</thead>
+        					<tbody>
+
+                                                        <!-- datos para la primera base de datos-->
+        						<?php 
+        						foreach ($empresa as $i)  {
+                                    foreach ($i->empresa as $g)  {
+                                    foreach ($i->pago as $p)  {
+        								if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
+
+ 				          # code...
+        							//echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
+        						?>
+        						<tr>
+        							<td><?php echo $g->id_empresa;?></td>
+        							<td><?php echo $g->nombre_empresa;?></td>
+        							<td><?php echo $p->valor_anual;?></td>
+        							<td><?php echo $p->total;?></td>
+                                    <td><?php echo $p->estado;?></td>
+                                    <td>
+                                        <input type="image"  src="<?=base_url('librerias/images/agregarp.png')?>" width="25" height="25" data-toggle="modal" data-target="#miModal" onclick='agregarp(<?php echo $g->id_contrato;?>)' >
+                                  
+                                        
+                                    </td>
+
+        						  </tr>
+
+        						<?php }}} }?>
+
+                                                        <!-- datos para la segunda base de datos -->
+                                                        <?php 
+                                                        foreach ($empresa2 as $i)  {
+                                                             foreach ($i->empresa as $g)  {
+                                                                foreach ($i->pago as $p)  {
+                                                                        if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
+
+                                          # code...
+                                                                //echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
+                                                        ?>
+                                                        <tr>
+                                                                <td><?php echo $g->id_empresa;?></td>
+                                                                <td><?php echo $g->nombre_empresa;?></td>
+                                                                <td><?php echo $p->valor_anual;?></td>
+                                                                <td><?php echo $p->total;?></td>
+                                                                <td><?php echo $p->estado;?></td>
+                                                                  <td>
+                                                                    <input type="image"  src="<?=base_url('librerias/images/agregarp.png')?>" width="25" height="25" data-toggle="modal" data-target="#miModal" onclick='agregarp2(<?php echo $g->id_contrato;?>)'>
+
+
+                                                                </td>
+                                                            </a>
+                                                          </tr>
+
+                                                        <?php }}}} ?>
+        								
+        					</tbody>
+        				</table>
+        			</div>
+
+
+        		</div>
+        	</div>
+        </div>
+
+        <!-- model para agregar el pago-->
+        <!-- Trigger the modal with a button -->
+<div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">PAGO</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
+                    
+                </div>
+                <div class="modal-body">    
+                    <form id="formulario" action="<?= site_url('/pago_controlador/insertar_pago_empresa'); ?>" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Empresa</label>
+                            <input class="form-control" name="inputEmpresa" id="nombreE" type="text" placeholder="" disabled>
+                            
+                    </div>
+                        
+                                 <div class="col-xs-8">
+                                    <label>Valor Pago</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" name="valor" value="<?php echo set_value('valor_pago')?>">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Estado</label>
+                                    <select name="estado" class="form-control" type="text">
+                                        <option>Pendiente</option>
+                                        <option>Cancelado</option>
+                                    </select>
+                                </div>
+                            
+                                      
+                        <br>        
+                        <button type="submit" class="btn btn-primary">Guardar</button>    
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+
+
+<!-- scrip para agregar pago -->
+<script type="text/javascript">
+    
+
+    function agregarp(id){
+
+        
+
+        <?php 
+         foreach ($empresa as $i) {
+        foreach ($i->empresa as $g) {
+            ?>
+            var c = '<?php echo $g->id_contrato;?>';
+            if (c == id){ 
+                console.log('si');
+                var nombre = document.getElementById('nombreE');
+                nombre.value = '<?php echo $g->nombre_empresa;?>';
+                
+            }
+
+            <?php 
+}
+        }
+        ?>
+    }
+
+function agregarp2(id){
+
+        
+
+        <?php 
+         foreach ($empresa2 as $i) {
+        foreach ($i->empresa as $g) {
+            ?>
+            var c = '<?php echo $g->id_contrato;?>';
+            if (c == id){ 
+                console.log('si');
+                var nombre = document.getElementById('nombreE');
+                nombre.value = '<?php echo $g->nombre_empresa;?>';
+                
+            }
+
+            <?php 
+}
+        }
+        ?>
+    }
+
+</script>
+
+</body>
+</html>

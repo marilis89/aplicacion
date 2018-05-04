@@ -41,8 +41,8 @@ class Controlador extends CI_Controller {
    }
 
    public function empresa(){
-    $empresa['empresa3']= json_decode($this-> curl->simple_get('http://192.168.5.31/proyecto/index.php/rest_correo/index_get') );
-    $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectop/index.php/rest_empresa/index_get') );
+    $empresa['empresa3']= json_decode($this-> curl->simple_get('http://localhost/proyecto/index.php/rest_empresa/index_get') );
+    $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectorest/index.php/rest_empresa/index_get') );
     $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_empresa/index_get'));
     $this->load->view('listaEmpresa',$empresa);
    }

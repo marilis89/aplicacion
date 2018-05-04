@@ -14,15 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="<?=base_url('librerias/jquery/jquery.min.js')?>"></script> 
 
 	
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
-	</head>
+</head>
 	
 	<body>
     
@@ -86,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="list-group">
       <a href="<?=site_url('controlador')?>" class="list-group-item ">Agregar Contrato</a>
       <a href="<?=site_url('producto')?>" class="list-group-item">Agregar Producto</a>
-      <a href="#" class="list-group-item">Agregar Pago</a>
+      <a href="<?=site_url('pago_controlador')?>" class="list-group-item">Agregar Pago</a>
       <a href="<?=site_url('controlador/menu')?>" class="list-group-item">Lista Deudores</a>
       <a href="<?=site_url('controlador/empresa')?>" class="list-group-item">Lista Empresas</a>
     </div>
