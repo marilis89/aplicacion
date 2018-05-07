@@ -58,12 +58,13 @@ class Pago_controlador extends CI_Controller
 			else{ */
 
 				$data = array(
-					'id_contrato' =>  $this->input->post('inputEmpresa'),
+					'id_contrato' =>  $this->input->post('inputId'),
 					'valor_pago' => $this->input->post('valor'),
 					'estado' => $this->input->post('estado'));
 
 				$this-> Empresa_model->ingreso_pago($data);
-				$empresa['empresa'] = $this-> Empresa_model -> consulta_empresa();
+				  $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectorest/index.php/rest_empresa/index_get') );
+				  $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_empresa/index_get'));
 
 			   //$data['message'] = 'Data Inserted Successfully';
 				$this->load->view('list_pago', $empresa);

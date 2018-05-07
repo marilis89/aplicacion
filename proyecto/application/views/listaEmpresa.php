@@ -35,17 +35,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    </tr>
 	  </thead>
 	  <tbody>
-
-      <!-- php para presentar json propio -->
 	<?php
 
 
 	foreach ($empresa as $i) {
 		foreach ($i->empresa as $g) {
-
+     
+      
+   
+				# code...
 			?>
 
-
+			
+			
 		
 		<tr>
 			<td><?php echo $g->id_empresa;?></td>
@@ -57,11 +59,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
 
+
+			
+
 		</tr>
 	
+		
 		<?php } } ?>
-
-<!-- php para presentar json de otra app -->
 
     <?php
 
@@ -69,8 +73,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   foreach ($empresa2 as $i) {
     foreach ($i->empresa as $g) {
      
+      
+   
+        # code...
       ?>
 
+      
+      
     
     <tr>
       <td><?php echo $g->id_empresa;?></td>
@@ -78,9 +87,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <td><?php echo $g->nombre_empresa;?></td>
       <td><?php echo $g->correo;?></td>
       <td><?php echo $g->link;?></td>
-      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizare(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
 
-      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminare(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
 
 
       
@@ -89,11 +98,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
     
     <?php } } ?>
-    
 
-    <!-- php para presentar json remoto -->
+      <?php
+
+
+  foreach ($empresa3 as $i) {
+    foreach ($i->empresa as $g) {
+     
+      
+   
+        # code...
+      ?>
+
+      
+      
+    
+    <tr>
+      <td><?php echo $g->id_empresa;?></td>
+      <td><?php echo $g->cedula_ruc;?></td>
+      <td><?php echo $g->nombre_empresa;?></td>
+      <td><?php echo $g->correo;?></td>
+      <td><?php echo $g->link;?></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
+
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
+
+
+      
+
+    </tr>
+  
+    
+    <?php } } ?>
 
   
+
+
 
 
 
@@ -175,14 +215,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     function actualizar(id)
     {
-
-     
       
     	<?php 
-      foreach ($empresa as $i) {
-        foreach ($i->empresa as $g) {
+      foreach ($empresa as $g) {
         ?>
-    		var c = '<?php echo $g->id_empresa;?>';
+    		var c = '<?php echo $g1->id_empresa;?>';
         if (c == id){ 
         
 
@@ -205,7 +242,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          document.getElementById('formulario').action = "<?=site_url('controlador/actualizarEmpresa/');?>"+c;
       }<?php 
         
-      }
       }
       ?>
 
