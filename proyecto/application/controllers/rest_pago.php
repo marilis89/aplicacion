@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 
-class Rest_empresa extends REST_Controller {
+class Rest_pago extends REST_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -19,7 +19,7 @@ class Rest_empresa extends REST_Controller {
     	//llamando al modelo para consultar en base de datos 1
 
     	$empresa['empresa'] = $this-> Empresa_model -> consulta_empresa();
-        $empresa['pago'] = $this-> Empresa_model -> consulta_deudores();
+        $empresa['pago'] = $this-> Empresa_model -> consulta_pago();
 
     //llamando al modelo para consultar en base de datos 2
 

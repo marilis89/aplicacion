@@ -32,8 +32,8 @@ function __construct(){
    }
       
 
-   function conecta_bd_a(){
-      $query = $this->db->query('SELECT p.id_contrato, c.fecha_vecimiento, c.valor_anual,
+   function consulta_deudores(){
+      $query = $this->db->query('SELECT p.id_contrato, c.fecha_vecimiento, c.valor_anual, c.fecha_contrato,
 SUM(p.valor_pago) total
  from pago p,contrato c WHERE c.id_contrato = p.id_contrato and c.fecha_vecimiento <= NOW() 
 GROUP BY p.id_contrato');
