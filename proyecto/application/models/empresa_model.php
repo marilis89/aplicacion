@@ -97,22 +97,18 @@ GROUP BY p.id_contrato');
     return $query->result();
   }
 
-  function guardarNuevoProducto($producto,$id_contrato){
+  function guardarNuevoProducto($producto){
     $id_producto=0;
     $this->db->insert('producto',$producto);
     if ($this->db->affected_rows() == '1')
     {
-      $id_producto= $this->db->insert_id();
+      return TRUE;
     }
     else
     {
       return FALSE;
     }
-    $this->db->query('INSERT INTO contrato_producto(id_prodcuto,id_contrato)
-      VALUES ('.$id_producto.','.$id_contrato.')');
-
-
-
+  
   }
 
 
