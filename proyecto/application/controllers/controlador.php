@@ -74,6 +74,8 @@ class Controlador extends CI_Controller {
          $correo = $this->input->post('inputCorreo');
         $link = $this->input->post('inputLink');
          $facturacion = $this->input->post('inputFacturacion');
+         $valor=$this->input->post('inputValorP');
+         $estado=$this->input->post('inputEstado');
 
     $producto = array
     (
@@ -92,11 +94,14 @@ class Controlador extends CI_Controller {
         'valor_anual' => $this->input->post('inputValorA')
       );
 
+
+
       
 
      // $this->load-> model('Empresa_model');
     $id_contrato= $this-> Empresa_model->guardarContratos($contrato,$producto);
     $this->guardarEmpresa($id_contrato,$nombre,$cedula,$tipo,$representante,$telefono,$celular,$correo,$link,$facturacion);
+    $this->guardarPago($id_contrato,$valor,$estado);
 
 
     // $this->load ->view('form_empresa');
@@ -119,12 +124,21 @@ class Controlador extends CI_Controller {
 
   $this-> Empresa_model->guardarNuevaEmpresa($empresa);
 
-  $data['empresa']=$this-> Empresa_model -> conecta_bd();
-  $this->load->view('listaEmpresa',$data);
+//  $data['empresa']=$this-> Empresa_model -> conecta_bd();
+ // $this->load->view('listaEmpresa',$data);
 
 
 
 
+ }
+
+ public function guardarPago($id_contrato,$valor,$estado){
+  $data= array('id_contrato' =>  $id_contrato,
+          'valor_pago' => $valor,
+          'estado' => $estado);
+  $this-> Empresa_model->ingreso_pago($data);
+   $nombre['vendedor']=$this-> Empresa_model -> nombreVendedor();
+  $this->load->view('form_empresa',$nombre);
  }
 
 

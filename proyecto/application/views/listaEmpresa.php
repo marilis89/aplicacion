@@ -284,7 +284,7 @@ $n=0;
         document.getElementById('correo').value= '<?php echo $g->correo;?>';
         document.getElementById('link').value= '<?php echo $g->link;?>';
         document.getElementById('facturacion').value= '<?php echo $g->servicio_facturacion;?>';
-         document.getElementById('formulario').action = "http://localhost/proyectop/index.php/controlador/actualizarEmpresa/"+c;
+         document.getElementById('formulario').action = "<?=site_url('client/index_put/');?>"+c;
       }<?php 
         }
       }

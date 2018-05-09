@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Client extends CI_Controller
 {
-    public function index_put()
+    public function index_put($id_empresa)
     {
         $this->load
             ->add_package_path(FCPATH.'vendor/restclient')
@@ -24,7 +24,7 @@ class Client extends CI_Controller
     'servicio_facturacion'=>$this->input->post('inputFacturacion')
   );
 
-        $json = $this->restclient->put(site_url('http://localhost/proyectop/index.php/rest_empresa/index_put'), $empresa);
+        $json = $this->restclient->put(site_url('http://localhost/proyectop/index.php/rest_actualizar/index_put/')+$id_empresa, $empresa);
 
         $this->restclient->debug();
     }

@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$actual=date('Y-m-d');
 				$dias = (strtotime($actual)-strtotime($k->fecha_vecimiento))/86400;
                 $dias = abs($dias); $dias = floor($dias);
-                if($dias <= 30){
+                if($dias <= 31){
 				# code...
 			?>
 
