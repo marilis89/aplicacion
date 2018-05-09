@@ -9,40 +9,34 @@ class Email_controller extends CI_Controller {
        }
 
 
-    function send_mail($correo){
-      $this->load->library('email');
-          $this->email->initialize($config);
+    function send_mail(){
+       //cargamos la libreria email de ci
+     $this->load->library("email");
+
+ //configuracion para gmail
+     $configGmail = array(
+       'protocol' => 'smtp',
+       'smtp_host' => 'ssl://smtp.gmail.com',
+       'smtp_port' => 25,
+       'smtp_user' => 'marlot0602@gmail.com',
+       'smtp_pass' => 'lorenita1991',
+       'mailtype' => 'html',
+       'charset' => 'utf-8',
+       'newline' => '\r\n'
+     );
+
+     $this->email->initialize($configGmail);
  
-      //Ponemos la dirección de correo que enviará el email y un nombre
-        $this->email->from('vmarisela2@gmail.com', 'Victor Robles');
-         
-      /*
-       * Ponemos el o los destinatarios para los que va el email
-       * en este caso al ser un formulario de contacto te lo enviarás a ti
-       * mismo
-       */
-        $this->email->to('vmarisela2@gmail.com', 'Víctor Robles');
-         
-      //Definimos el asunto del mensaje
-        $this->email->subject("hola");
-         
-      //Definimos el mensaje a enviar
-        $this->email->message(
-                "Email: ".$correo.
-                " Mensaje: hola"
-                );
-         
-        //Enviamos el email y si se produce bien o mal que avise con una flasdata
-        if($this->email->send()){
-         
-           return $this->session->set_flashdata('envio', 'Email enviado correctamente');
-        }else{
-        
-           return $this->session->set_flashdata('envio', 'No se a enviado el email');
-        }
-       }
+     $this->email->from('Lorena');
+     $this->email->to("marlot0602@gmail.com");
+     $this->email->subject('Bienvenido/a ');
+     $this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
+     $this->email->send();
+ //con esto podemos ver el resultado
+     var_dump($this->email->print_debugger());
+   }
 
 
-    } 
+} 
 
-    ?>
+   
