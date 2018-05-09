@@ -72,6 +72,21 @@ class Pago_controlador extends CI_Controller
 			//}
 			
 	}
+
+	public function buscar(){
+
+		if ($this->input->get('keyword') !== FALSE) {
+			$data ['results'] = $this->m->searchMessages($this->input->get('keyword'));
+			$data['search_passed'] = TRUE;
+			$data['search_value'] = $this->input->get('keyword');
+		} else {
+			$data['search_passed'] = FALSE;
+			$data['results'] = array();
+		}
+
+		$this->load->view("list_pago", $data);
+	
+	}
 }
 
 

@@ -19,9 +19,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <?php $this->load->view("estilos/estilo"); ?>
 
+        <!-- busqueda-->
+
+         <!-- -->
+
         <div class="col-lg-9">
 
-        	<div class="card mt-4">
+           	<div class="card mt-4">
+
+        <!--buscador -->
+                <div class="form-group">
+               <div class="input-group">
+                <br>
+                   <div class="contenedor-modal">
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModalIngresar">Ingresar Pago</button>
+                </div>
+    
+             <!-- Aqui la lista de sugerencias -->
+                <div id="suggestions">
+                 <div id="autoSuggestionsList"></div>
+                </div>
+            </div>
+        <!-- -->
 
         		<center><h1>PAGOS</h1></center>
         		<div class="container">
@@ -34,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         							<th scope="col">#</th>
         							<th scope="col">Nombre Empresa</th>
         							<th scope="col">Valor Anual</th>
-        							<th scope="col">Pago</th>
+        							<th scope="col">Abono</th>
                                     <th scope="col">Por Cancelar</th>
                                     <th scope="col">Estado</th>
         							<th scope="col"></th>
@@ -192,6 +211,63 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
+
+    <!-- Ingresar Pago-->
+    <div class="modal fade" id="miModalIngresar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">PAGO</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                        <span aria-hidden="true">&times;</span>
+                    </button> 
+                    
+                </div>
+                <div class="modal-body">    
+                    <form id="formulario" action="<?= site_url('/pago_controlador/insertar_pago_empresa'); ?>" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Empresa</label>
+                            <select name="inputEmpresa" class="form-control">   
+
+                                <?php 
+                                foreach ($empresa as $i)  {
+                                    foreach ($i->empresa as $g)  {
+                                   
+                                        echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>' ;  
+                 
+                                }} 
+                                foreach ($empresa2 as $i)  {
+                                    foreach ($i->empresa as $g)  {
+                                   
+                                        echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>' ;  
+                          # code...
+                                    //echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
+                                }} ?>       
+                                                     
+                            </select>
+                        </div>
+                        <br>
+                        <div class="col-xs-8">
+                                    <label>Valor Pago</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input type="text" class="form-control" name="valor" value="<?php echo set_value('valor_pago')?>" required="" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Estado</label>
+                                    <select name="estado" class="form-control" type="text" required="" placeholder="">
+                                        <option>Select...</option>
+                                        <option>Pendiente</option>
+                                        <option>Cancelado</option>
+                                    </select>
+                                </div>
+                       
+                        <br>        
+                        <button type="submit" class="btn btn-primary">Guardar</button>    
+                    </form>
+                </div>
+    <!-- ............................-->
 
 
 <!-- scrip para agregar pago -->
