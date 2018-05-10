@@ -37,12 +37,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <tbody>
 	<?php
 
-$n=0;
 
 	foreach ($empresa as $i) {
 		foreach ($i->empresa as $g) {
      
-      $n++;
+      
    
 				# code...
 			?>
@@ -51,7 +50,7 @@ $n=0;
 			
 		
 		<tr>
-			<td><?php echo $n;?></td>
+			<td><?php echo $g->id_empresa;?></td>
 			<td><?php echo $g->cedula_ruc;?></td>
 			<td><?php echo $g->nombre_empresa;?></td>
 			<td><?php echo $g->correo;?></td>
@@ -68,14 +67,11 @@ $n=0;
 		
 		<?php } } ?>
 
-    <
-
     <?php
 
 
   foreach ($empresa2 as $i) {
     foreach ($i->empresa as $g) {
-      $n++;
      
       
    
@@ -86,14 +82,14 @@ $n=0;
       
     
     <tr>
-      <td><?php echo $n;?></td>
+      <td><?php echo $g->id_empresa;?></td>
       <td><?php echo $g->cedula_ruc;?></td>
       <td><?php echo $g->nombre_empresa;?></td>
       <td><?php echo $g->correo;?></td>
       <td><?php echo $g->link;?></td>
-      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar2(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
 
-      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar2(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
 
 
       
@@ -103,14 +99,13 @@ $n=0;
     
     <?php } } ?>
 
-   
+    <!--
 
       <?php
 
 
   foreach ($empresa3 as $i) {
     foreach ($i->empresa as $g) {
-       $n++;
      
       
    
@@ -121,14 +116,14 @@ $n=0;
       
     
     <tr>
-      <td><?php echo $n;?></td>
+      <td><?php echo $g->id_empresa;?></td>
       <td><?php echo $g->cedula_ruc;?></td>
       <td><?php echo $g->nombre_empresa;?></td>
       <td><?php echo $g->correo;?></td>
       <td><?php echo $g->link;?></td>
-      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar3(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
 
-      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar3(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
 
 
       
@@ -138,7 +133,8 @@ $n=0;
     
     <?php } } ?>
 
-  
+  -->
+
 
 
 
@@ -223,10 +219,9 @@ $n=0;
     {
       
     	<?php 
-      foreach ($empresa as $i) {
-      foreach ($i->empresa as $g) {
+      foreach ($empresa as $g) {
         ?>
-    		var c = '<?php echo $g->id_empresa;?>';
+    		var c = '<?php echo $g1->id_empresa;?>';
         if (c == id){ 
         
 
@@ -248,6 +243,7 @@ $n=0;
         document.getElementById('facturacion').value= '<?php echo $g->servicio_facturacion;?>';
          document.getElementById('formulario').action = "<?=site_url('controlador/actualizarEmpresa/');?>"+c;
       }<?php 
+<<<<<<< HEAD
         }
       }
       ?>
@@ -304,32 +300,14 @@ $n=0;
         ?>
         var c = '<?php echo $g->id_empresa;?>';
         if (c == id){ 
+=======
+>>>>>>> ee6f33a7a4c2b2cae2d432d173e7f391dcb4f2c9
         
-
-      
-        var div1 = document.getElementById('tabla');
-        var div2 = document.getElementById('actualiza');
-      
-          div2.style.display = 'block';
-          div1.style.display = 'none';
-        var nombre= document.getElementById('nombre');
-        nombre.value='<?php echo $g->nombre_empresa;?>';
-        document.getElementById('cedula').value= '<?php echo $g->cedula_ruc;?>';
-        document.getElementById('representante').value= '<?php echo $g->representante_legal;?>';
-        document.getElementById('tipo').value= '<?php echo $g->tipo_empresa;?>';
-        document.getElementById('telefono').value= '<?php echo $g->telefono;?>';
-        document.getElementById('celular').value= '<?php echo $g->celular;?>';
-        document.getElementById('correo').value= '<?php echo $g->correo;?>';
-        document.getElementById('link').value= '<?php echo $g->link;?>';
-        document.getElementById('facturacion').value= '<?php echo $g->servicio_facturacion;?>';
-         document.getElementById('formulario').action = "http://192.168.5.31/proyecto/index.php/controlador/actualizarEmpresa/"+c;
-      }<?php 
-        }
       }
       ?>
 
 
-        
+    	  
     }
 
 
@@ -337,20 +315,6 @@ $n=0;
 
 
       document.location.href="<?=site_url('controlador/eliminarEmpresa/')?>"+id;
-      // body...
-    }
-
-     function eliminar2(id) {
-
-
-      document.location.href="http://localhost/proyectop/index.php/controlador/eliminarEmpresa/"+id;
-      // body...
-    }
-
-     function eliminar3(id) {
-
-
-      document.location.href="http://192.168.5.31/proyecto/index.php/controlador/eliminarEmpresa/"+id;
       // body...
     }
 </script>
