@@ -31,13 +31,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="form-group">
                <div class="input-group">
                 <br>
-<<<<<<< HEAD
              
     
              <!-- Aqui la lista de sugerencias -->
-=======
-                <!-- Aqui la lista de sugerencias -->
->>>>>>> ee6f33a7a4c2b2cae2d432d173e7f391dcb4f2c9
                 <div id="suggestions">
                  <div id="autoSuggestionsList"></div>
                 </div>
@@ -65,17 +61,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                                         <!-- datos para la primera base de datos-->
         						<?php 
+                                $n=0;
         						foreach ($empresa as $i)  {
                                     foreach ($i->empresa as $g)  {
                                     foreach ($i->pago as $p)  {
         								if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
                                             $debe =$p->valor_anual-$p->total;
+                                            $n++;
 
  				          # code...
         							//echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
         						?>
         						<tr>
-        							<td><?php echo $g->id_empresa;?></td>
+        							<td><?php echo $n;?></td>
         							<td><?php echo $g->nombre_empresa;?></td>
         							<td><?php echo $p->valor_anual;?></td>
         							<td><?php echo $p->total;?></td>
@@ -99,12 +97,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                 foreach ($i->pago as $p)  {
                                                                         if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
                                                                              $debe2 =$p->valor_anual-$p->total;
+                                                                             $n++;
 
                                           # code...
                                                                 //echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
                                                         ?>
                                                         <tr>
-                                                                <td><?php echo $g->id_empresa;?></td>
+                                                                <td><?php echo $n;?></td>
+                                                                <td><?php echo $g->nombre_empresa;?></td>
+                                                                <td><?php echo $p->valor_anual;?></td>
+                                                                <td><?php echo $p->total;?></td>
+                                                                <td><?php echo $debe2;?></td>
+                                                                <td><?php echo $p->estado;?></td>
+                                                                
+                                                                  <td>
+                                                                    <input type="image"  src="<?=base_url('librerias/images/agregarp.png')?>" width="25" height="25" data-toggle="modal" data-target="#miModal" onclick='agregarp2(<?php echo $g->id_contrato;?>)'>
+
+
+                                                                </td>
+                                                            </a>
+                                                          </tr>
+
+                                                        <?php }}}} ?>
+ <!-- datos para la base de datos remota -->
+
+                                                                <?php 
+                                                        foreach ($empresa3 as $i)  {
+                                                             foreach ($i->empresa as $g)  {
+                                                                foreach ($i->pago as $p)  {
+                                                                        if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
+                                                                             $debe2 =$p->valor_anual-$p->total;
+                                                                             $n++;
+
+                                          # code...
+                                                                //echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
+                                                        ?>
+                                                        <tr>
+                                                                <td><?php echo $n;?></td>
                                                                 <td><?php echo $g->nombre_empresa;?></td>
                                                                 <td><?php echo $p->valor_anual;?></td>
                                                                 <td><?php echo $p->total;?></td>
@@ -181,11 +210,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
 
-<<<<<<< HEAD
    
 
-=======
->>>>>>> ee6f33a7a4c2b2cae2d432d173e7f391dcb4f2c9
 
 <!-- scrip para agregar pago -->
 <script type="text/javascript">
@@ -231,7 +257,7 @@ function agregarp2(id){
                 nombre.value = '<?php echo $g->nombre_empresa;?>';
                 var contrato=document.getElementById('nombreId');
                 contrato.value= c;
-                document.getElementById('formulario').action="http://localhost/proyectorest/index.php/controlador/pago";
+                document.getElementById('formulario').action="http://localhost/proyectop/index.php/controlador/pago";
                 //document.getElementById('debe').value='<?php echo $debe2;?>';
                 
             }
