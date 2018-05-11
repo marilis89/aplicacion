@@ -69,4 +69,20 @@ class Client extends CI_Controller
        // echo $resultado;
 //$this->restclient->debug();
     }
+
+       public function index_delete1($id_empresa)
+    {
+      
+
+        $json = $this->restclient->delete('http://localhost/proyectop/index.php/rest_empresa/eliminar',$id_empresa);
+
+
+
+     redirect('controlador/empresa','refresh');
+
+
+
+       // echo $resultado;
+//$this->restclient->debug();
+    }
 }

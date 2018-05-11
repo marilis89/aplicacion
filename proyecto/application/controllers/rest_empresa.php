@@ -19,43 +19,25 @@ class Rest_empresa extends REST_Controller {
     	//llamando al modelo para consultar en base de datos 1
 
     	$empresa['empresa'] = $this-> Empresa_model -> consulta_empresa();
-     $empresa['pago'] = $this-> Empresa_model -> consulta_deudores();
+        $empresa['pago'] = $this-> Empresa_model -> consulta_deudores();
+
+    //llamando al modelo para consultar en base de datos 2
+
+ //$empresa['empresa1'] = $this-> Baseprueba_model -> consultaEmpresas();
+   //$empresa['pago1'] = $this-> Baseprueba_model -> consultaPagos();
 
 
 // transformando datos a json
-		
-		if (! is_null($empresa)) {
+
+       if (! is_null($empresa)) {
 			# code...
-			$this->response(array('response' => $empresa),200);
+         $this->response(array('response' => $empresa),200);
 			//$this->load->view('vendedores', $empresa);
-		}else{
-			$this->response(array('error' => 'No existe correo'),404);
-		}
-
-		 
-    }
+     }else{
+         $this->response(array('error' => 'No existe correo'),404);
+     }
 
 
-        public function update_put($id)
-    {
-        # code...
-        if ((! $this->put())|| (! $id)) {
-            # code...
-            $this->response(NULL, 400);
-        }
-
-        $empresa = $this-> Empresa_model->updateEmpresa($id,$this->put());
-
-        echo $empresa;
-
-        if (! is_null($empresa)) {
-            # code...
-            $this->response(array('response' => 'Empresa Actualizado'),200);
-        }else{
-            $this->response(array('error' => 'Ha ocurrido un error en el servidor'),400);
-        }
-    }
-
-    
+ }
 
 }

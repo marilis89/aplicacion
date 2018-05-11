@@ -9,7 +9,7 @@ class Email_controller extends CI_Controller {
        }
 
 
-    function send_mail(){
+    function send_mail($correo){
        //cargamos la libreria email de ci
      $this->load->library("email");
 
@@ -18,8 +18,8 @@ class Email_controller extends CI_Controller {
        'protocol' => 'smtp',
        'smtp_host' => 'ssl://smtp.gmail.com',
        'smtp_port' => 25,
-       'smtp_user' => 'marlot0602@gmail.com',
-       'smtp_pass' => '.......',
+       'smtp_user' => 'vmarisela2@gmail.com',
+       'smtp_pass' => 'Lis89ro2',
        'mailtype' => 'html',
        'charset' => 'utf-8',
        'newline' => '\r\n'
@@ -27,8 +27,8 @@ class Email_controller extends CI_Controller {
 
      $this->email->initialize($configGmail);
  
-     $this->email->from('Lorena');
-     $this->email->to("marlot0602@gmail.com");
+     $this->email->from('vmarisela2@gmail.com');
+     $this->email->to("vmarisela2@gmail.com");
      $this->email->subject('Bienvenido/a ');
      $this->email->message('<h2>Email enviado con codeigniter haciendo uso del smtp de gmail</h2><hr><br> Bienvenido al blog');
      $this->email->send();

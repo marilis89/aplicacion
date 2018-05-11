@@ -97,26 +97,22 @@ GROUP BY p.id_contrato');
     return $query->result();
   }
 
-  function guardarNuevoProducto($producto,$id_contrato){
+  function guardarNuevoProducto($producto){
     $id_producto=0;
     $this->db->insert('producto',$producto);
     if ($this->db->affected_rows() == '1')
     {
-      $id_producto= $this->db->insert_id();
+      return TRUE;
     }
     else
     {
       return FALSE;
     }
-    $this->db->query('INSERT INTO contrato_producto(id_prodcuto,id_contrato)
-      VALUES ('.$id_producto.','.$id_contrato.')');
-
-
-
+  
   }
 
 
-  function updateEmpresa($id_empresa,$empresa){
+  function updateEmpresa($empresa,$id_empresa){
     $this->db->where('id_empresa',$id_empresa);
     $this->db->update('empresa',$empresa);
     if ($this->db->affected_rows() == '1')
@@ -153,16 +149,6 @@ GROUP BY p.id_contrato');
       return FALSE;
     }
   
-
-  }
-
-  function buscar($buscar,$inicio = FALSE, $cantidadregistro = FALSE){
-    
-    $this->db->like('id', $buscar);
-    $this->db->like('nombre_empresa', $buscar);
-    $query=$this->db->get('empresa');
-    return $query->result();
-
 
   }
 

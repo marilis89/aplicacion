@@ -2,7 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 	<html>
-	
+	<<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="<?= base_url('librerias/DataTables/css/datatables.min.css');?>"/>
+  </head>
 
 	
 	<body>
@@ -22,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="form-group" id="tabla">
 		<center><h1>Lista de Empresa</h1></center>
 
-		<table class="table">
+		<table id="table_id" class="display">
 	  <thead class="thead-dark">
 	    <tr>
 	      <th scope="col">#</th>
@@ -37,11 +42,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	  <tbody>
 	<?php
 
+$n=0;
 
 	foreach ($empresa as $i) {
 		foreach ($i->empresa as $g) {
      
-      
+      $n++;
    
 				# code...
 			?>
@@ -50,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 		
 		<tr>
-			<td><?php echo $g->id_empresa;?></td>
+			<td><?php echo $n;?></td>
 			<td><?php echo $g->cedula_ruc;?></td>
 			<td><?php echo $g->nombre_empresa;?></td>
 			<td><?php echo $g->correo;?></td>
@@ -67,11 +73,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<?php } } ?>
 
+    
+
     <?php
 
 
   foreach ($empresa2 as $i) {
     foreach ($i->empresa as $g) {
+      $n++;
      
       
    
@@ -82,14 +91,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       
     
     <tr>
-      <td><?php echo $g->id_empresa;?></td>
+      <td><?php echo $n;?></td>
       <td><?php echo $g->cedula_ruc;?></td>
       <td><?php echo $g->nombre_empresa;?></td>
       <td><?php echo $g->correo;?></td>
       <td><?php echo $g->link;?></td>
-      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar2(<?php echo $g->id_empresa;?>)"></td>
 
-      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar2(<?php echo $g->id_empresa;?>)"></td>
 
 
       
@@ -99,13 +108,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <?php } } ?>
 
-    <!--
+   
 
       <?php
 
 
   foreach ($empresa3 as $i) {
     foreach ($i->empresa as $g) {
+       $n++;
      
       
    
@@ -116,14 +126,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       
     
     <tr>
-      <td><?php echo $g->id_empresa;?></td>
+      <td><?php echo $n;?></td>
       <td><?php echo $g->cedula_ruc;?></td>
       <td><?php echo $g->nombre_empresa;?></td>
       <td><?php echo $g->correo;?></td>
       <td><?php echo $g->link;?></td>
-      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/editar.png')?>" width="25" height="25" onclick="actualizar3(<?php echo $g->id_empresa;?>)"></td>
 
-      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar(<?php echo $g->id_empresa;?>)"></td>
+      <td><input type="image" src="<?=base_url('img/delete.png')?>" width="25" height="25" onclick= "eliminar3(<?php echo $g->id_empresa;?>)"></td>
 
 
       
@@ -133,14 +143,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     <?php } } ?>
 
-  -->
-
+  
 
 
 
 
 	
 	  </tbody>
+    <tfoot>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Cedula/RUC</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Link</th>
+        <th scope="col">...</th>
+        <th scope="col">...</th>
+      </tr>
+    </tfoot>
 	</table>
 	
 	
@@ -211,7 +231,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 	</div>
 
-	
+	<script type="text/javascript" src="<?= base_url('librerias/DataTables/js/jquery.datatables.min.js');?>"></script>
 		<script type="text/javascript">
 
 
@@ -219,9 +239,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     {
       
     	<?php 
-      foreach ($empresa as $g) {
+      foreach ($empresa as $i) {
+      foreach ($i->empresa as $g) {
         ?>
-    		var c = '<?php echo $g1->id_empresa;?>';
+    		var c = '<?php echo $g->id_empresa;?>';
         if (c == id){ 
         
 
@@ -243,12 +264,88 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         document.getElementById('facturacion').value= '<?php echo $g->servicio_facturacion;?>';
          document.getElementById('formulario').action = "<?=site_url('controlador/actualizarEmpresa/');?>"+c;
       }<?php 
-        
+        }
       }
       ?>
 
 
     	  
+    }
+
+
+    function actualizar2(id)
+    {
+      
+      <?php 
+      foreach ($empresa2 as $i) {
+      foreach ($i->empresa as $g) {
+        ?>
+        var c = '<?php echo $g->id_empresa;?>';
+        if (c == id){ 
+        
+
+      
+        var div1 = document.getElementById('tabla');
+        var div2 = document.getElementById('actualiza');
+      
+          div2.style.display = 'block';
+          div1.style.display = 'none';
+        var nombre= document.getElementById('nombre');
+        nombre.value='<?php echo $g->nombre_empresa;?>';
+        document.getElementById('cedula').value= '<?php echo $g->cedula_ruc;?>';
+        document.getElementById('representante').value= '<?php echo $g->representante_legal;?>';
+        document.getElementById('tipo').value= '<?php echo $g->tipo_empresa;?>';
+        document.getElementById('telefono').value= '<?php echo $g->telefono;?>';
+        document.getElementById('celular').value= '<?php echo $g->celular;?>';
+        document.getElementById('correo').value= '<?php echo $g->correo;?>';
+        document.getElementById('link').value= '<?php echo $g->link;?>';
+        document.getElementById('facturacion').value= '<?php echo $g->servicio_facturacion;?>';
+         document.getElementById('formulario').action = "<?=site_url('client/index_put1/');?>"+c;
+      }<?php 
+        }
+      }
+      ?>
+
+
+        
+    }
+
+
+    function actualizar3(id)
+    {
+      
+      <?php 
+      foreach ($empresa3 as $i) {
+      foreach ($i->empresa as $g) {
+        ?>
+        var c = '<?php echo $g->id_empresa;?>';
+        if (c == id){ 
+        
+
+      
+        var div1 = document.getElementById('tabla');
+        var div2 = document.getElementById('actualiza');
+      
+          div2.style.display = 'block';
+          div1.style.display = 'none';
+        var nombre= document.getElementById('nombre');
+        nombre.value='<?php echo $g->nombre_empresa;?>';
+        document.getElementById('cedula').value= '<?php echo $g->cedula_ruc;?>';
+        document.getElementById('representante').value= '<?php echo $g->representante_legal;?>';
+        document.getElementById('tipo').value= '<?php echo $g->tipo_empresa;?>';
+        document.getElementById('telefono').value= '<?php echo $g->telefono;?>';
+        document.getElementById('celular').value= '<?php echo $g->celular;?>';
+        document.getElementById('correo').value= '<?php echo $g->correo;?>';
+        document.getElementById('link').value= '<?php echo $g->link;?>';
+        document.getElementById('facturacion').value= '<?php echo $g->servicio_facturacion;?>';
+         document.getElementById('formulario').action = "<?=site_url('client/index_put2/');?>"+c;
+      }<?php 
+        }
+      }
+      ?>
+
+
+        
     }
 
 
@@ -258,6 +355,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       document.location.href="<?=site_url('controlador/eliminarEmpresa/')?>"+id;
       // body...
     }
+
+     function eliminar2(id) {
+
+
+      document.location.href="<?=site_url('client/index_delete1/');?>"+id;
+      // body...
+    }
+
+     function eliminar3(id) {
+
+
+      document.location.href="<?=site_url('client/index_delete2/');?>"+id;
+      // body...
+    }
+
+    $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
 </script>
 
 	
