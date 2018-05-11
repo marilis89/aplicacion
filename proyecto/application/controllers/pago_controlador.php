@@ -26,8 +26,8 @@ class Pago_controlador extends CI_Controller
 		
       	//cargo el modelo
 
-      $empresa['empresa3']= json_decode($this-> curl->simple_get('http://192.168.5.31/proyecto/index.php/rest_pago/index_get') );
-    $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectop/index.php/rest_pago/index_get') );
+      	//$empresa['empresa3']= json_decode($this-> curl->simple_get('http://192.168.5.31/proyecto/index.php/rest_correo/index_get') );
+    $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectorest/index.php/rest_empresa/index_get') );
     $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_pago/index_get'));
    		
 		//$empresa['empresa'] = $this-> Empresa_model -> conecta_bd();
@@ -63,7 +63,7 @@ class Pago_controlador extends CI_Controller
 					'estado' => $this->input->post('estado'));
 
 				$this-> Empresa_model->ingreso_pago($data);
-				  $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectop/index.php/rest_empresa/index_get') );
+				  $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectorest/index.php/rest_empresa/index_get') );
 				  $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_pago/index_get'));
 
 			   //$data['message'] = 'Data Inserted Successfully';
@@ -73,20 +73,6 @@ class Pago_controlador extends CI_Controller
 			
 	}
 
-	public function buscar(){
-
-		if ($this->input->get('keyword') !== FALSE) {
-			$data ['results'] = $this->m->searchMessages($this->input->get('keyword'));
-			$data['search_passed'] = TRUE;
-			$data['search_value'] = $this->input->get('keyword');
-		} else {
-			$data['search_passed'] = FALSE;
-			$data['results'] = array();
-		}
-
-		$this->load->view("list_pago", $data);
-	
-	}
 }
 
 

@@ -41,17 +41,14 @@ class Controlador extends CI_Controller {
    }
 
    public function empresa(){
-   $empresa['empresa3']= json_decode($this-> curl->simple_get('http://192.168.5.31/proyecto/index.php/rest_empresa/index_get') );
-    $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectop/index.php/rest_empresa/index_get') );
+    //$empresa['empresa3']= json_decode($this-> curl->simple_get('http://localhost/proyecto/index.php/rest_empresa/index_get') );
+    $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectorest/index.php/rest_empresa/index_get') );
     $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_empresa/index_get'));
     $this->load->view('listaEmpresa',$empresa);
    }
 
 
     public function menu(){
-      $empresa['empresa3']= json_decode($this-> curl->simple_get('http://192.168.5.31/proyecto/index.php/rest_empresa/index_get') );
-
-      $empresa['empresa2']= json_decode($this-> curl->simple_get('http://localhost/proyectop/index.php/rest_empresa/index_get') );
 
       $empresa['empresa']= json_decode($this-> curl->simple_get($this->API.'/rest_empresa/index_get') );
 
@@ -74,8 +71,6 @@ class Controlador extends CI_Controller {
          $correo = $this->input->post('inputCorreo');
         $link = $this->input->post('inputLink');
          $facturacion = $this->input->post('inputFacturacion');
-         $valor=$this->input->post('inputValorP');
-         $estado=$this->input->post('inputEstado');
 
     $producto = array
     (
@@ -94,14 +89,11 @@ class Controlador extends CI_Controller {
         'valor_anual' => $this->input->post('inputValorA')
       );
 
-
-
       
 
      // $this->load-> model('Empresa_model');
     $id_contrato= $this-> Empresa_model->guardarContratos($contrato,$producto);
     $this->guardarEmpresa($id_contrato,$nombre,$cedula,$tipo,$representante,$telefono,$celular,$correo,$link,$facturacion);
-    $this->guardarPago($id_contrato,$valor,$estado);
 
 
     // $this->load ->view('form_empresa');
@@ -124,21 +116,12 @@ class Controlador extends CI_Controller {
 
   $this-> Empresa_model->guardarNuevaEmpresa($empresa);
 
-//  $data['empresa']=$this-> Empresa_model -> conecta_bd();
- // $this->load->view('listaEmpresa',$data);
+  $data['empresa']=$this-> Empresa_model -> conecta_bd();
+  $this->load->view('listaEmpresa',$data);
 
 
 
 
- }
-
- public function guardarPago($id_contrato,$valor,$estado){
-  $data= array('id_contrato' =>  $id_contrato,
-          'valor_pago' => $valor,
-          'estado' => $estado);
-  $this-> Empresa_model->ingreso_pago($data);
-   $nombre['vendedor']=$this-> Empresa_model -> nombreVendedor();
-  $this->load->view('form_empresa',$nombre);
  }
 
 
@@ -158,14 +141,16 @@ class Controlador extends CI_Controller {
   $mensaje=$this-> Empresa_model->updateEmpresa($empresa,$id_empresa);
 
   if($mensaje = TRUE){
-      redirect('controlador/empresa');
+    $data['empresa']=$this-> Empresa_model -> conecta_bd();
+  $this->load->view('listaEmpresa',$data);
   }
  }
 
  public function eliminarEmpresa($id_empresa){
   $mensaje=$this->Empresa_model->deleteEmpresa($id_empresa);
   if($mensaje = TRUE){
-        redirect('controlador/empresa','refresh');
+    $data['empresa']=$this-> Empresa_model -> conecta_bd();
+  $this->load->view('listaEmpresa',$data);
   }
  }
 

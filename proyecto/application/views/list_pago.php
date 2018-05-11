@@ -10,70 +10,59 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-  <link rel="stylesheet" type="text/css" href="<?= base_url();?>librerias/css/bootstrap-grid.css">
-   <script type="text/javascript" src="<?= base_url();?>librerias/js/bootstrap.js"></script>
-  <link rel="stylesheet" type="text/css" href="<?= base_url();?>librerias/css/bootstrap.min.css">
-  <script type="text/javascript" src="<?= base_url();?>librerias/jquery/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?= base_url('librerias/css/bootstrap-grid.css');?>">
+   <script type="text/javascript" src="<?= base_url('librerias/js/bootstrap.js');?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?= base_url('librerias/css/bootstrap.min.css');?>">
+   <script type="text/javascript" src="<?= base_url('librerias/jquery/jquery-1.12.4.min.js');?>"></script>
+
+    
+   <!-- <link rel="stylesheet" type="text/css" href="<?= base_url('index.php/librerias/DataTables/css/jquery.datatables.min.css');?>"-->
+<link rel="stylesheet" type="text/css" href="<?= base_url('librerias/DataTables/css/datatables.min.css');?>"/>
+
 </head>
 <body>
 
         <?php $this->load->view("estilos/estilo"); ?>
 
-        <!-- busqueda-->
-
-         <!-- -->
-
         <div class="col-lg-9">
-
-           	<div class="card mt-4">
-
-        <!--buscador -->
-                <div class="form-group">
-               <div class="input-group">
-                <br>
              
-    
-             <!-- Aqui la lista de sugerencias -->
-                <div id="suggestions">
-                 <div id="autoSuggestionsList"></div>
-                </div>
-            </div>
-        <!-- -->
+           	<div class="card mt-4">
+       
+                <!-- Aqui la lista de sugerencias -->
+      
 
         		<center><h1>PAGOS</h1></center>
         		<div class="container">
 
 
         			<div class="table-responsive">
-        				<table class="table">
+        				<table id="table_id" class="display">
         					<thead>
         						<tr>
-        							<th scope="col">#</th>
-        							<th scope="col">Nombre Empresa</th>
-        							<th scope="col">Valor Anual</th>
-        							<th scope="col">Abono</th>
-                                    <th scope="col">Por Cancelar</th>
-                                    <th scope="col">Estado</th>
-        							<th scope="col"></th>
+        							<th >#</th>
+        							<th >Nombre Empresa</th>
+        							<th >Valor Anual</th>
+        							<th >Abono</th>
+                                    <th >Por Cancelar</th>
+                                    <th >Estado</th>
+        							<th ></th>
         							</tr>
         					</thead>
         					<tbody>
 
                                                         <!-- datos para la primera base de datos-->
         						<?php 
-                                $n=0;
         						foreach ($empresa as $i)  {
                                     foreach ($i->empresa as $g)  {
                                     foreach ($i->pago as $p)  {
         								if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
                                             $debe =$p->valor_anual-$p->total;
-                                            $n++;
 
  				          # code...
         							//echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
         						?>
         						<tr>
-        							<td><?php echo $n;?></td>
+        							<td><?php echo $g->id_empresa;?></td>
         							<td><?php echo $g->nombre_empresa;?></td>
         							<td><?php echo $p->valor_anual;?></td>
         							<td><?php echo $p->total;?></td>
@@ -97,43 +86,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                                 foreach ($i->pago as $p)  {
                                                                         if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
                                                                              $debe2 =$p->valor_anual-$p->total;
-                                                                             $n++;
 
                                           # code...
                                                                 //echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
                                                         ?>
                                                         <tr>
-                                                                <td><?php echo $n;?></td>
-                                                                <td><?php echo $g->nombre_empresa;?></td>
-                                                                <td><?php echo $p->valor_anual;?></td>
-                                                                <td><?php echo $p->total;?></td>
-                                                                <td><?php echo $debe2;?></td>
-                                                                <td><?php echo $p->estado;?></td>
-                                                                
-                                                                  <td>
-                                                                    <input type="image"  src="<?=base_url('librerias/images/agregarp.png')?>" width="25" height="25" data-toggle="modal" data-target="#miModal" onclick='agregarp2(<?php echo $g->id_contrato;?>)'>
-
-
-                                                                </td>
-                                                            </a>
-                                                          </tr>
-
-                                                        <?php }}}} ?>
- <!-- datos para la base de datos remota -->
-
-                                                                <?php 
-                                                        foreach ($empresa3 as $i)  {
-                                                             foreach ($i->empresa as $g)  {
-                                                                foreach ($i->pago as $p)  {
-                                                                        if($g->id_contrato == $p->id_contrato && $p->total<$p->valor_anual){
-                                                                             $debe2 =$p->valor_anual-$p->total;
-                                                                             $n++;
-
-                                          # code...
-                                                                //echo '<option value= '.$g->id_contrato.'>' .$g->nombre_empresa.'</option>'                  
-                                                        ?>
-                                                        <tr>
-                                                                <td><?php echo $n;?></td>
+                                                                <td><?php echo $g->id_empresa;?></td>
                                                                 <td><?php echo $g->nombre_empresa;?></td>
                                                                 <td><?php echo $p->valor_anual;?></td>
                                                                 <td><?php echo $p->total;?></td>
@@ -151,7 +109,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                         <?php }}}} ?>
         								
         					</tbody>
-        				</table>
+                            <tfoot>
+                             <tr>
+                                <th>#</th>
+                                <th>Nombre Empresa</th>
+                                <th>Valor Anual</th>
+                                <th >Abono</th>
+                                <th >Por Cancelar</th>
+                                <th >Estado</th>
+                                <th ></th>
+                            </tr>
+                        </tfoot>
+                    </table>
         			</div>
 
 
@@ -210,9 +179,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
 
-   
-
-
+<script type="text/javascript" src="<?= base_url('librerias/DataTables/js/jquery.datatables.min.js');?>"></script>
 <!-- scrip para agregar pago -->
 <script type="text/javascript">
     
@@ -257,7 +224,7 @@ function agregarp2(id){
                 nombre.value = '<?php echo $g->nombre_empresa;?>';
                 var contrato=document.getElementById('nombreId');
                 contrato.value= c;
-                document.getElementById('formulario').action="http://localhost/proyectop/index.php/controlador/pago";
+                document.getElementById('formulario').action="http://localhost/proyectorest/index.php/controlador/pago";
                 //document.getElementById('debe').value='<?php echo $debe2;?>';
                 
             }
@@ -267,6 +234,10 @@ function agregarp2(id){
         }
         ?>
     }
+
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
 
 </script>
 
